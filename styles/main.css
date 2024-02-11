@@ -1,0 +1,52 @@
+:root { /*Reusable variables, mainly for colors and fonts.*/
+  --primary-color: black; 
+  --header-color: tan;
+}
+body{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 30px; /*Overall page font size*/
+}
+h1 /*Attatch header to the top of the page*/
+{
+  margin: 0;
+  padding:0;
+}
+a /*Style links*/
+{
+  color: var(--primary-color);
+  text-decoration: none;
+}
+nav a{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+header{
+  background-color: var(--header-color);
+  margin: 0;
+  padding: 0;
+}
+ul { /*This was added for the navigation bar. Edit if it breaks other lists.*/
+    display: inline-block;
+    list-style-type: none; /* This removes bullet points from nav bar.  */
+    margin: 0; /*Remove default stuff . . . v  v v*/
+    padding: 0;
+  }
+
+li {
+    display: inline; /*This was added to make the nav bar horizontal. Edit if needed. */
+}
+
+footer { /*Attatch footer to the bottom of the page. 2/9/2024*/
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: tan;
+    color: black;
+    text-align: center;
+  }
+.footer_nav li{
+  display: block;
+}
