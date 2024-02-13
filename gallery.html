@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/main.css" /> 
+
+
+    <!--Font import-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <title>Williams Floral</title>
 </head>
 <body>
     
 <header>
-    <h1>Williams Floral</h1>
-    <nav> <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="contact_me.html">Contact Me</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-      </ul> </nav>
+    
+    <div class="headbox">
+        <h1>Williams Floral</h1>
+        <a href="javascript:void(0);" class="dropbutton" onclick="hamburger()">
+            <i class="fa fa-bars" style="color: black; font-size: 2rem; "></i>
+    </div>
+
+    <div id="navdrop">
+    
+        <a style="order: 1;" id="home" href="index.html">Home</a>
+        <a style="order: 2;" id="contact" href="contact_me.html">Contact Me</a>
+        <a style="order: 3;" id="gallery" href="gallery.html">Gallery</a>
+    </div>
+
 </header>
 
 <main>
-Main main main main
+
+</div>
 </main>
 
-
 <footer>
-    <div class="footer">
-        <p>Footer Placeholder</p>
-        <ul class="footer_nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="contact_me.html">Contact Me</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-          </ul>
+    <div class="footerbox">
+    <p class="footerheader">Footer Placeholder</p>
+    <ul class="footer_nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact_me.html">Contact Me</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
     </div>
-    </footer>
+    
+</div>
+</footer>
 
+
+<script src="scripts/main.js"></script> 
 </body>
 </html>

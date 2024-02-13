@@ -1,36 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/main.css" /> 
+
+
+    <!--Font import-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <title>Williams Floral</title>
 </head>
 <body>
     
 <header>
-    <h1>Williams Floral</h1>
-    <nav> <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="contact_me.html">Contact Me</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-      </ul> </nav>
+    
+    <div class="headbox">
+
+        <a href="javascript:void(0);" class="dropbutton" onclick="hamburger()">
+            <i class="fa fa-bars" style="color: black; font-size: 2rem; "></i>
+    </div>
+
+    <div id="navdrop">
+    
+        <a style="order: 1;" id="home" href="index.html">Home</a>
+        <a style="order: 2;" id="contact" href="contact_me.html">Inquiries</a>
+        <a style="order: 3;" id="gallery" href="gallery.html">Portfolio</a>
+    </div>
+
 </header>
 
 <main>
-Main main main main
+
+    <h1>Williams Floral</h1>
+    <p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."</p>
+
 </main>
 
 <footer>
-<div class="footer">
-    <p>Footer Placeholder</p>
+    <div class="footerbox">
+    <div class="footerlogos">
+        <a id="ig" href="https://www.instagram.com/lwilliams_floral/"><img src="images/icons8-instagram-100.png" alt="Visit Our Instagram Page"></a>
+        <a id="ig" href="https://www.instagram.com/lwilliams_floral/"><img src="images/icons8-email-100(1).png" alt="Reach Me Via Email"></a>
+        
+    </div>
     <ul class="footer_nav">
         <li><a href="index.html">Home</a></li>
-        <li><a href="contact_me.html">Contact Me</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact_me.html">Inquiries</a></li>
+        <li><a href="gallery.html">Portfolio</a></li>
       </ul>
+    </div>
+    
 </div>
 </footer>
 
+
+<script src="scripts/main.js"></script> 
 </body>
 </html>

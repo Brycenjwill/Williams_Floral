@@ -1,52 +1,151 @@
 :root { /*Reusable variables, mainly for colors and fonts.*/
-  --primary-color: black; 
-  --header-color: tan;
+
+  /*Pallette 1: https://coolors.co/palette/b76e79-ffd1dc-800020-fff5e1-36454f*/
+  /*Pallette 2: https://coolors.co/palette/fffafa-fff8dc-ffd1dc-f19cbb-cf71af*/
+  --primary-font-color: black; 
+  --header-background: #ffbdcd;
+  --primary-background: #ffbdcd;
+  --hover-color: #E2A2B2;
+  --header-font: "Bitter", serif;
+  --header-size: 2.5rem;
+  /*Fonts: Bitter light 300 for most, Bitter medium 500 for tital*/
 }
+
+html, body{
+  height: 100%;
+}
+
+/*Code for universal body*/
+/*----------------------------------------------------------------------------------------*/
 body{
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    font-size: 30px; /*Overall page font size*/
-}
-h1 /*Attatch header to the top of the page*/
-{
-  margin: 0;
-  padding:0;
-}
-a /*Style links*/
-{
-  color: var(--primary-color);
-  text-decoration: none;
-}
-nav a{
-  padding-left: 3rem;
-  padding-right: 3rem;
-}
-header{
-  background-color: var(--header-color);
+  height: 100%;
+  font-family: var(--header-font);
+  background-color: white;
   margin: 0;
   padding: 0;
+  font-weight: 300;
 }
-ul { /*This was added for the navigation bar. Edit if it breaks other lists.*/
-    display: inline-block;
-    list-style-type: none; /* This removes bullet points from nav bar.  */
-    margin: 0; /*Remove default stuff . . . v  v v*/
-    padding: 0;
-  }
+/*----------------------------------------------------------------------------------------*/
 
-li {
-    display: inline; /*This was added to make the nav bar horizontal. Edit if needed. */
+
+/*Code for universal header*/
+/*----------------------------------------------------------------------------------------*/
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-footer { /*Attatch footer to the bottom of the page. 2/9/2024*/
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: tan;
-    color: black;
-    text-align: center;
-  }
-.footer_nav li{
+.headbox{
+  top: 0;
+  background-color: var(--header-background);
+  text-align: center;
+  display: flex;
+  height: var(--header-size);
+  
+}
+.headbox .dropbutton{
+  position: fixed;
+  right: 5%;
+}
+
+
+
+#navdrop{
+
+  padding: 0;
+  list-style: none;
+  background-color: var(--header-background);
+  display: none;
+  
+}
+
+#navdrop a{ /*Dropdown links*/
+
+  text-decoration: none;
+  color: var(--primary-font-color);
   display: block;
+  text-align: left;
+  padding-left: 5%;
+
+  border-bottom-style: solid;
+  border-width: 1px;
+
 }
+#navdrop a:hover{ /*Dropdown links*/
+
+  background-color: var(--hover-color);
+
+}
+
+/*Spacing for hamburger menu items*/
+#home{ /*Home dropdown link*/
+
+  padding: 2% 0 2% 0;
+}
+#contact {
+  padding: 2% 0 2% 0;
+}
+#gallery{
+  padding: 2% 0 2% 0;
+}
+
+
+
+/*----------------------------------------------------------------------------------------*/
+
+
+/*Code for main page*/
+/*----------------------------------------------------------------------------------------*/
+main{
+  text-align: center;
+  top: var(--header-size);
+  width: 100%;
+  margin-top: var(--header-size);
+  padding: 0;
+}
+
+main h1{ /*Code for title above header*/
+
+  padding-bottom: .5rem;
+  font-style: italic;
+  font-weight: 200;
+  font: 1rem;
+}
+/*----------------------------------------------------------------------------------------*/
+
+
+
+
+/*Code for universal footer*/
+/*----------------------------------------------------------------------------------------*/
+footer{
+  text-align: center;
+  background-color: var(--header-background);
+}
+
+/*Footer Icons*/
+.footerlogos{
+  padding-top: 3%;
+}
+.footerlogos img{
+  width: 1.5rem;
+}
+#ig{
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/*Page Links within footer*/
+.footer_nav{
+  padding: 0;
+  margin: 0;
+}
+.footer_nav li{
+  list-style: none;
+}
+.footer_nav a{
+  text-decoration: none;
+  color: var(--header-font-color);
+}
+/*----------------------------------------------------------------------------------------*/
