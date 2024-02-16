@@ -2,7 +2,7 @@
 
   /*Pallette 1: https://coolors.co/palette/b76e79-ffd1dc-800020-fff5e1-36454f*/
   /*Pallette 2: https://coolors.co/palette/fffafa-fff8dc-ffd1dc-f19cbb-cf71af*/
-  --primary-font-color: black; 
+  --primary-font-color: #282a35; 
   --header-background: #ffbdcd;
   --primary-background: #ffbdcd;
   --hover-color: #E2A2B2;
@@ -19,6 +19,7 @@ html, body{
 /*----------------------------------------------------------------------------------------*/
 body{
   height: 100%;
+  color: var(--primary-font-color);
   font-family: var(--header-font);
   background-color: white;
   margin: 0;
@@ -45,8 +46,10 @@ header{
   
 }
 .headbox .dropbutton{
+  color: var(--primary-font-color);
   position: fixed;
-  right: 5%;
+  left: 3%;
+  top: 1%;
 }
 
 
@@ -111,6 +114,7 @@ main h1{ /*Code for title above header*/
   font-style: italic;
   font-weight: 200;
   font: 1rem;
+
 }
 /*----------------------------------------------------------------------------------------*/
 
@@ -136,6 +140,8 @@ footer{
   margin-right: 1.5rem;
 }
 
+
+
 /*Page Links within footer*/
 .footer_nav{
   padding: 0;
@@ -143,6 +149,7 @@ footer{
 }
 .footer_nav li{
   list-style: none;
+  padding: 1% 0 1% 0;
 }
 .footer_nav a{
   text-decoration: none;
