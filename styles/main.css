@@ -13,12 +13,12 @@
 
 html, body{
   height: 100%;
+
 }
 
 /*Code for universal body*/
 /*----------------------------------------------------------------------------------------*/
 body{
-  height: 100%;
   color: var(--primary-font-color);
   font-family: var(--header-font);
   background-color: white;
@@ -101,6 +101,7 @@ header{
 /*Code for main page*/
 /*----------------------------------------------------------------------------------------*/
 main{
+  min-height: 100%;
   text-align: center;
   top: var(--header-size);
   width: 100%;

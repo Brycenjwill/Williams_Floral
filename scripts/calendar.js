@@ -62,9 +62,14 @@ for (let i = 1; i <= getDaysInMonth(curmonth, d.getFullYear()); i++){
 function Display(){ //display calendar
     if(getFirstOfMonth(curmonth, curyear) == 1){ //If the month start on a Sunday. . .
         for(let i = 0; i < dates.length; i++){
-            newDay = document.createElement("p"); //test create paragraph
-            newDay.innerHTML = dates[i].getDay();
-            newDay.style.margin = 0;
+            newDay = document.createElement("div"); //test create paragraph
+            newDate = document.createElement("p");
+            newDate.innerHTML = dates[i].getDay();
+            
+            newDate.style.margin = 0;
+            newDay.style.alignItems = "center";
+            newDay.style.justifyItems = "center";
+            newDay.appendChild(newDate)
             document.getElementById("calendarbox").appendChild(newDay);
         }
     }
