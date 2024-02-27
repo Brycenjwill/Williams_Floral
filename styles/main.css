@@ -121,6 +121,22 @@ main h1{ /*Code for title above header*/
 
 /*Code for calendar*/
 /*----------------------------------------------------------------------------------------*/
+/*Calendar Header (month, arrows)*/
+#calendarHeader{
+  margin-left: 25%;
+  display: flex;
+  justify-content: left;
+}
+#calendarHeader h2{
+  margin: 0;
+}
+#calendarHeader img{
+  margin-left: 5%;
+}
+
+
+
+
 /*Container for calendar*/
 #calendarbox{
   margin: 0 auto;

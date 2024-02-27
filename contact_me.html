@@ -23,7 +23,7 @@
     <div class="headbox">
 
         <a href="javascript:void(0);" class="dropbutton" onclick="hamburger()">
-            <i class="fa fa-bars" style="color: black; font-size: 2rem; "></i>
+        <i class="fa fa-bars" style="color: black; font-size: 2rem; "></i>
     </div>
 
     <div id="navdrop">
@@ -36,9 +36,13 @@
 </header>
 
 <main>
-
     <h1>My Availability</h1>
-    <h2 id="monthValue"></h2>
+    <div id="calendarHeader">
+        <h2 id="monthValue"></h2>
+        <img style="max-height: 25px;" src="images/arrowLeft.png" alt="Previous Month" onclick="prevMonth()">
+        <img style="max-height: 25px;" src="images/arrow-right.png" alt="Next Month" onclick="nextMonth()">
+    </div>
+
     <div id="calendarbox">
         <div class="dayOfWeek">SUN</div>
         <div class="dayOfWeek">MON</div>

@@ -3,10 +3,7 @@
 //in current month to auto gen calendar??? Or pull from external calendar??
 
 //Globals. . .
-let dates = [];
-const d = new Date();
-let curmonth = d.getMonth(); //initialize displayed month as actual month . . .
-let curyear = d.getFullYear();
+
 
 class Day{ //Not sure if this will be useful . . .
     constructor(num, pos, current){
@@ -54,12 +51,6 @@ function getFirstOfMonth(month, year){ //Get weekday of first of given month
 
 }
 
-//Create all day objects for current month. . .
-for (let i = 1; i <= getLastDayOfMonth(curmonth, d.getFullYear()).getDate(); i++){
-    let day = new Day(i, null, 0);
-    dates.push(day);
-}
-
 //Get any dates from the previuos month that should display on calendar
 function getPrevOverlap(curmonth, curyear, weekday){ 
     const prevm = new Date(curyear, curmonth - 1);
@@ -85,11 +76,12 @@ function getPostOverlap(curmonth, curyear, weekday){
     for(let i = 0; i < daysLeft; i++){ //Add dates per each missing date in week. . .
         let day = new Day(i+1, null, 1);
         postdates.push(day);
-        console.log(day.getDay());
     }
 
     return postdates;
 }
+
+
 
 //Where the dates are generated on the calendar
 function createDateDisplay(date){ 
@@ -98,7 +90,7 @@ function createDateDisplay(date){
     newDay = document.createElement("div"); //Create date div box
     newDate = document.createElement("p");
     newDate.innerHTML = date.getDay(); 
-    
+    newDay.className = "createdDate";
     //Style Document Element
     newDate.style.margin = 0;
     newDay.style.alignItems = "center";
@@ -112,12 +104,28 @@ function createDateDisplay(date){
     document.getElementById("calendarbox").appendChild(newDay);
 }
 
-//Display month. Decides what should be rendered based on month.
-function Display(){ 
-    let datesAppended = [];
-        if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
-        datesAppended = dates;
 
+
+
+//Main Calls. . .
+
+function genDates(date){/*Gen dates for current month*/
+let dates = [];
+
+//Create all day objects for current month. . .
+for (let i = 1; i <= getLastDayOfMonth(curmonth, d.getFullYear()).getDate(); i++){
+    let day = new Day(i, null, 0);
+    dates.push(day);
+}
+return dates;
+}
+
+
+//Display month. Decides what should be rendered based on month.
+function Display(dates, curmonth, curyear){ 
+    let datesAppended = [];
+    if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
+        datesAppended = dates;
     }
     else{ //When the month doesn't start on a suday. . . Use getPrevOverlap. . .combine lists
         let prevdates = getPrevOverlap(curmonth, curyear, getFirstOfMonth(curmonth, curyear));
@@ -129,7 +137,6 @@ function Display(){
         datesAppended = datesAppended.concat(postdates); //Combine date lists. . .
 
         for(let i = 0; i < datesAppended.length; i++){
-            
             createDateDisplay(datesAppended[i])
         }  
 
@@ -162,5 +169,58 @@ function Display(){
 }
 
 
-//Main Calls. . .
-Display();
+
+//Navigate between months
+/-----------------------------------------------------------------------------------------------------------------------/
+
+//Remove all calendar items for reset
+function clearCalendar(){
+    const toClear = document.getElementsByClassName("createdDate");
+    while(toClear[0]){
+        toClear[0].remove();
+    }
+}
+
+//Shift month 1 to the past on button press
+function prevMonth(){
+    if (curmonth == 0){
+        curmonth = 11;
+        curyear -= 1;
+    }
+    else{
+        curmonth -= 1;
+    }
+    const d = new Date(curyear, curmonth);
+    let dates = genDates(d);
+
+    clearCalendar();
+    Display(dates, curmonth, curyear);
+}
+
+//Shift month 1 to future
+function nextMonth(){
+    if (curmonth == 11){
+        curmonth = 0;
+        curyear += 1;
+    }
+    else{
+        curmonth += 1;
+    }
+    const d = new Date(curyear, curmonth);
+    let dates = genDates(d);
+
+    clearCalendar();
+    Display(dates, curmonth, curyear);
+}
+
+
+
+
+//Initial launch
+/-----------------------------------------------------------------------------------------------------------------------/
+const d = new Date();
+let curmonth = d.getMonth(); //initialize displayed month as actual month . . .
+let curyear = d.getFullYear();
+
+let dates = genDates(d);
+Display(dates, curmonth, curyear);
