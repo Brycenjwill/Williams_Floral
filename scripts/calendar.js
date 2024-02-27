@@ -42,10 +42,9 @@ class Event{ //Events are created when a date is selected. Then they are deleted
     }
 }
 
-
-
-function getDaysInMonth(month, year){
-    return new Date(year, month+1, 0).getDate();
+//Return last day of given month.
+function getLastDayOfMonth(month, year){
+    return new Date(year, month+1, 0);
 }
 
 function getFirstOfMonth(month, year){ //Get weekday of first of given month
@@ -54,7 +53,7 @@ function getFirstOfMonth(month, year){ //Get weekday of first of given month
 }
 
 //Create all day objects for current month. . .
-for (let i = 1; i <= getDaysInMonth(curmonth, d.getFullYear()); i++){
+for (let i = 1; i <= getLastDayOfMonth(curmonth, d.getFullYear()).getDate(); i++){
     let day = new Day(i, null, true);
     dates.push(day);
 }
@@ -63,7 +62,7 @@ for (let i = 1; i <= getDaysInMonth(curmonth, d.getFullYear()); i++){
 function getPrevOverlap(curmonth, curyear, weekday){ 
     const prevm = new Date(curyear, curmonth - 1);
     let prevmonth = prevm.getMonth();
-    let length = getDaysInMonth(prevmonth, curyear);
+    let length = getLastDayOfMonth(prevmonth, curyear).getDate();
     let prevdates = [];
     weekday -= 1; //Weekday is stored in a 0 index, this makes the math work. . .
 
@@ -74,6 +73,19 @@ function getPrevOverlap(curmonth, curyear, weekday){
         weekday -= 1;
     }
     return prevdates;
+}
+
+function getPostOverlap(curmonth, curyear, weekday){
+    let postdates = [];
+    weekday -= 0; //Weekday is stored in a 0 index, this makes the math work. . .
+    i = 0;
+    while(i < (6-weekday)){ //Add dates per each missing date in week. . .
+        let day = new Day(i, null, false);
+        postdates.push(day);
+        i += 1;
+    }
+
+    return postdates;
 }
 
 //Where the dates are generated on the calendar
@@ -100,18 +112,32 @@ function createDateDisplay(date){
 //Display month. Decides what should be rendered based on month.
 function Display(){ 
     if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
-        for(let i = 0; i < dates.length; i++){
+        let datesAppended = dates;
 
-            createDateDisplay(dates[i])
-        }
     }
     else{ //When the month doesn't start on a suday. . . Use getPrevOverlap. . .combine lists
         let prevdates = getPrevOverlap(curmonth, curyear, getFirstOfMonth(curmonth, curyear));
-        let dateapp = prevdates.concat(dates);
-        for(let i = 0; i < dateapp.length; i++){
-            createDateDisplay(dateapp[i])
+        let datesAppended = prevdates.concat(dates);
 
-        }  
+    //If curmonth does not end on a saturday. . .
+        if(getLastDayOfMonth(curmonth,curyear).getDay() != 6){ 
+            let postdates = getPostOverlap(curmonth, curyear, getFirstOfMonth(curmonth, curyear));
+            datesAppended = datesAppended.concat(postdates); //Combine date lists. . .
+
+            for(let i = 0; i < datesAppended.length; i++){
+                createDateDisplay(datesAppended[i])
+            }  
+
+        }
+        else{
+            for(let i = 0; i < datesAppended.length; i++){
+                createDateDisplay(datesAppended[i])
+            }  
+        }
+        //Check if all 6 rows are filled in calendar. . .
+        if(datesAppended.length != 42){
+            console.log("too short. . .");
+        }
     }
 }
 
