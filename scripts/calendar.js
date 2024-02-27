@@ -155,6 +155,10 @@ function Display(){
         }
 
     }
+    //Set month value to display above calendar
+    let curmonthDate = new Date(curyear, curmonth);
+    const month = curmonthDate.toLocaleString('default', { month: 'long' }); //Get month value from curmonth
+    document.getElementById("monthValue").innerHTML = month + " " + curyear;
 }
 
 

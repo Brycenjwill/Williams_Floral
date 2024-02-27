@@ -124,13 +124,13 @@ main h1{ /*Code for title above header*/
 /*Container for calendar*/
 #calendarbox{
   margin: 0 auto;
-  width: 15rem;
-  height: 15rem;
+  width: 90%;
+  min-height: 15rem;
   border: 2px black solid;
   margin-bottom: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 /*----------------------------------------------------------------------------------------*/
