@@ -12,7 +12,9 @@ class Day{ //Not sure if this will be useful . . .
     constructor(num, pos, current){
         this.dayofmonth = num;
         this.pos = pos;
-        this.inCurrentMonth = current; //A boolean for if the date can be selected.
+
+        //An int for if the date is in current month. -1 is prev, 1 is post
+        this.inCurrentMonth = current; 
     }
 
     addEvents(){
@@ -54,7 +56,7 @@ function getFirstOfMonth(month, year){ //Get weekday of first of given month
 
 //Create all day objects for current month. . .
 for (let i = 1; i <= getLastDayOfMonth(curmonth, d.getFullYear()).getDate(); i++){
-    let day = new Day(i, null, true);
+    let day = new Day(i, null, 0);
     dates.push(day);
 }
 
@@ -68,7 +70,7 @@ function getPrevOverlap(curmonth, curyear, weekday){
 
 
     while(weekday >= 0){ //Add dates per each missing date in week. . .
-        let day = new Day(length - weekday, null, false);
+        let day = new Day(length - weekday, null, -1);
         prevdates.push(day);
         weekday -= 1;
     }
@@ -77,12 +79,13 @@ function getPrevOverlap(curmonth, curyear, weekday){
 
 function getPostOverlap(curmonth, curyear, weekday){
     let postdates = [];
-    weekday -= 0; //Weekday is stored in a 0 index, this makes the math work. . .
-    i = 0;
-    while(i < (6-weekday)){ //Add dates per each missing date in week. . .
-        let day = new Day(i, null, false);
+    daysLeft = 6 - weekday; //Weekday is stored in a 0 index, this makes the math work. . .
+    
+    
+    for(let i = 0; i < daysLeft; i++){ //Add dates per each missing date in week. . .
+        let day = new Day(i+1, null, 1);
         postdates.push(day);
-        i += 1;
+        console.log(day.getDay());
     }
 
     return postdates;
@@ -102,7 +105,7 @@ function createDateDisplay(date){
     newDay.style.justifyItems = "center";
     newDay.appendChild(newDate)
     
-    if (date.getCurrent() == false){ //When date outside current month. . .
+    if (date.getCurrent() != 0){ //When date outside current month. . .
         newDate.style.color = "grey"; //Set dates to some color on calendar to indicate.
     }
 
@@ -111,33 +114,46 @@ function createDateDisplay(date){
 
 //Display month. Decides what should be rendered based on month.
 function Display(){ 
-    if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
-        let datesAppended = dates;
+    let datesAppended = [];
+        if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
+        datesAppended = dates;
 
     }
     else{ //When the month doesn't start on a suday. . . Use getPrevOverlap. . .combine lists
         let prevdates = getPrevOverlap(curmonth, curyear, getFirstOfMonth(curmonth, curyear));
-        let datesAppended = prevdates.concat(dates);
-
+        datesAppended = prevdates.concat(dates);
+    }
     //If curmonth does not end on a saturday. . .
-        if(getLastDayOfMonth(curmonth,curyear).getDay() != 6){ 
-            let postdates = getPostOverlap(curmonth, curyear, getFirstOfMonth(curmonth, curyear));
-            datesAppended = datesAppended.concat(postdates); //Combine date lists. . .
+    if(getLastDayOfMonth(curmonth,curyear).getDay() != 6){ 
+        let postdates = getPostOverlap(curmonth, curyear, getLastDayOfMonth(curmonth,curyear).getDay());
+        datesAppended = datesAppended.concat(postdates); //Combine date lists. . .
 
-            for(let i = 0; i < datesAppended.length; i++){
-                createDateDisplay(datesAppended[i])
-            }  
+        for(let i = 0; i < datesAppended.length; i++){
+            
+            createDateDisplay(datesAppended[i])
+        }  
 
+    }
+    else{
+        for(let i = 0; i < datesAppended.length; i++){
+            createDateDisplay(datesAppended[i])
+        }  
+    }
+    //Check if all 6 rows are filled in calendar. . .
+    if(datesAppended.length != 42){
+        first = datesAppended[datesAppended.length - 1];
+
+        //Check for if month ends on a saturday. . .
+        if (first.getCurrent() == 0){
+            first = new Day(0, null, 1);
         }
-        else{
-            for(let i = 0; i < datesAppended.length; i++){
-                createDateDisplay(datesAppended[i])
-            }  
+
+        //If not, fill the extra week with dates from next month.
+        for(let i = 1; i <= 7; i++){
+            let day = new Day(i + first.getDay(), null, 1);
+            createDateDisplay(day);
         }
-        //Check if all 6 rows are filled in calendar. . .
-        if(datesAppended.length != 42){
-            console.log("too short. . .");
-        }
+
     }
 }
 
