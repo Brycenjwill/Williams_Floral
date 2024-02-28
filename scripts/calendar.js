@@ -1,11 +1,4 @@
-//Plans: 1. have the site pull from a list of monthy calendars based on 
-///the current month, to lower processing time for site. Use number of days
-//in current month to auto gen calendar??? Or pull from external calendar??
-
-//Globals. . .
-
-
-class Day{ //Not sure if this will be useful . . .
+class Day{ 
     constructor(num, pos, current){
         this.dayofmonth = num;
         this.pos = pos;
@@ -31,7 +24,6 @@ class Day{ //Not sure if this will be useful . . .
         //Display date in calendar
     }
 }
-
 class Event{ //Events are created when a date is selected. Then they are deleted
     constructor(time){
         this.time = time; //Set time of event to display
@@ -40,8 +32,93 @@ class Event{ //Events are created when a date is selected. Then they are deleted
         //Display event in popup
     }
 }
+//Main logic for generating calendar
+/-----------------------------------------------------------------------------------------------------------------------/
+//Display month. Decides what should be rendered based on month. . . The main logic for displaying calendar dates
+function Display(dates, curmonth, curyear){ 
+    let datesAppended = [];
+    if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
+        datesAppended = dates;
+    }
+    else{ //When the month doesn't start on a suday. . . Use getPrevOverlap. . .combine lists
+        let prevdates = getPrevOverlap(curmonth, curyear, getFirstOfMonth(curmonth, curyear));
+        datesAppended = prevdates.concat(dates);
+    }
+    //If curmonth does not end on a saturday. . .
+    if(getLastDayOfMonth(curmonth,curyear).getDay() != 6){ 
+        let postdates = getPostOverlap(curmonth, curyear, getLastDayOfMonth(curmonth,curyear).getDay());
+        datesAppended = datesAppended.concat(postdates); //Combine date lists. . .
 
-//Return last day of given month.
+        for(let i = 0; i < datesAppended.length; i++){
+            createDateDisplay(datesAppended[i])
+        }  
+    }
+    else{
+        for(let i = 0; i < datesAppended.length; i++){
+            createDateDisplay(datesAppended[i])
+        }  
+    }
+    
+
+
+    //Check if all 6 rows are filled in calendar. . . Fill if not.
+    if(datesAppended.length != 42){
+        first = datesAppended[datesAppended.length - 1];
+        //Check for if month ends on a saturday. . .
+        if (first.getCurrent() == 0){
+            first = new Day(0, null, 1);
+        }
+        //If not, fill the extra week with dates from next month.
+        for(let i = 1; i <= 7; i++){
+            let day = new Day(i + first.getDay(), null, 1);
+            datesAppended.push(day);
+            createDateDisplay(day);
+        }
+
+        //Double check for edge cases where 6 weeks aren't filled after first check. . .
+        if(datesAppended.length != 42){
+            first = datesAppended[datesAppended.length - 1];
+            //Check for if month ends on a saturday. . .
+            if (first.getCurrent() == 0){
+                first = new Day(0, null, 1);
+    
+            }
+    
+            //If not, fill the extra week with dates from next month.
+            for(let i = 1; i <= 7; i++){
+                let day = new Day(i + first.getDay(), null, 1);
+                createDateDisplay(day);
+            }
+    
+        }
+    }
+
+    //Set month value to display above calendar
+    let curmonthDate = new Date(curyear, curmonth);
+    const month = curmonthDate.toLocaleString('default', { month: 'long' }); //Get month value from curmonth
+    document.getElementById("monthValue").innerHTML = month + " " + curyear;
+}
+
+function createDateDisplay(date){ 
+    
+    //Create document element
+    newDay = document.createElement("div"); //Create date div box
+    newDate = document.createElement("p");
+    newDate.innerHTML = date.getDay(); 
+    newDay.className = "createdDate";
+    //Style Document Element
+    newDate.style.margin = 0;
+    newDay.style.alignItems = "center";
+    newDay.style.justifyItems = "center";
+    newDay.appendChild(newDate)
+    
+    if (date.getCurrent() != 0){ //When date outside current month. . .
+        newDate.style.color = "grey"; //Set dates to some color on calendar to indicate.
+    }
+
+    document.getElementById("calendarbox").appendChild(newDay);
+}
+//Return last day of given month. . . Used for getting num of days to display per month. . .
 function getLastDayOfMonth(month, year){
     return new Date(year, month+1, 0);
 }
@@ -51,7 +128,6 @@ function getFirstOfMonth(month, year){ //Get weekday of first of given month
 
 }
 
-//Get any dates from the previuos month that should display on calendar
 function getPrevOverlap(curmonth, curyear, weekday){ 
     const prevm = new Date(curyear, curmonth - 1);
     let prevmonth = prevm.getMonth();
@@ -81,94 +157,17 @@ function getPostOverlap(curmonth, curyear, weekday){
     return postdates;
 }
 
+//Generage the dates list for current month.
+function genDates(date){
+    let dates = [];
 
-
-//Where the dates are generated on the calendar
-function createDateDisplay(date){ 
-    
-    //Create document element
-    newDay = document.createElement("div"); //Create date div box
-    newDate = document.createElement("p");
-    newDate.innerHTML = date.getDay(); 
-    newDay.className = "createdDate";
-    //Style Document Element
-    newDate.style.margin = 0;
-    newDay.style.alignItems = "center";
-    newDay.style.justifyItems = "center";
-    newDay.appendChild(newDate)
-    
-    if (date.getCurrent() != 0){ //When date outside current month. . .
-        newDate.style.color = "grey"; //Set dates to some color on calendar to indicate.
+    //Create all day objects for current month. . .
+    for (let i = 1; i <= getLastDayOfMonth(curmonth, date.getFullYear()).getDate(); i++){
+        let day = new Day(i, null, 0);
+        dates.push(day);
     }
-
-    document.getElementById("calendarbox").appendChild(newDay);
+    return dates;
 }
-
-
-
-
-//Main Calls. . .
-
-function genDates(date){/*Gen dates for current month*/
-let dates = [];
-
-//Create all day objects for current month. . .
-for (let i = 1; i <= getLastDayOfMonth(curmonth, d.getFullYear()).getDate(); i++){
-    let day = new Day(i, null, 0);
-    dates.push(day);
-}
-return dates;
-}
-
-
-//Display month. Decides what should be rendered based on month.
-function Display(dates, curmonth, curyear){ 
-    let datesAppended = [];
-    if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
-        datesAppended = dates;
-    }
-    else{ //When the month doesn't start on a suday. . . Use getPrevOverlap. . .combine lists
-        let prevdates = getPrevOverlap(curmonth, curyear, getFirstOfMonth(curmonth, curyear));
-        datesAppended = prevdates.concat(dates);
-    }
-    //If curmonth does not end on a saturday. . .
-    if(getLastDayOfMonth(curmonth,curyear).getDay() != 6){ 
-        let postdates = getPostOverlap(curmonth, curyear, getLastDayOfMonth(curmonth,curyear).getDay());
-        datesAppended = datesAppended.concat(postdates); //Combine date lists. . .
-
-        for(let i = 0; i < datesAppended.length; i++){
-            createDateDisplay(datesAppended[i])
-        }  
-
-    }
-    else{
-        for(let i = 0; i < datesAppended.length; i++){
-            createDateDisplay(datesAppended[i])
-        }  
-    }
-    //Check if all 6 rows are filled in calendar. . .
-    if(datesAppended.length != 42){
-        first = datesAppended[datesAppended.length - 1];
-
-        //Check for if month ends on a saturday. . .
-        if (first.getCurrent() == 0){
-            first = new Day(0, null, 1);
-        }
-
-        //If not, fill the extra week with dates from next month.
-        for(let i = 1; i <= 7; i++){
-            let day = new Day(i + first.getDay(), null, 1);
-            createDateDisplay(day);
-        }
-
-    }
-    //Set month value to display above calendar
-    let curmonthDate = new Date(curyear, curmonth);
-    const month = curmonthDate.toLocaleString('default', { month: 'long' }); //Get month value from curmonth
-    document.getElementById("monthValue").innerHTML = month + " " + curyear;
-}
-
-
 
 //Navigate between months
 /-----------------------------------------------------------------------------------------------------------------------/
@@ -212,8 +211,6 @@ function nextMonth(){
     clearCalendar();
     Display(dates, curmonth, curyear);
 }
-
-
 
 
 //Initial launch

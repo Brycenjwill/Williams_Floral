@@ -122,17 +122,6 @@ main h1{ /*Code for title above header*/
 /*Code for calendar*/
 /*----------------------------------------------------------------------------------------*/
 /*Calendar Header (month, arrows)*/
-#calendarHeader{
-  margin-left: 25%;
-  display: flex;
-  justify-content: left;
-}
-#calendarHeader h2{
-  margin: 0;
-}
-#calendarHeader img{
-  margin-left: 5%;
-}
 
 
 
@@ -146,7 +135,25 @@ main h1{ /*Code for title above header*/
   margin-bottom: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+#calendarbox #monthValue{
+  grid-column: 1/6;
+  margin: 0;
+  text-align: left;
+  margin-left: 1rem;
+}
+
+#calendarHeader{
+  margin-left: 25%;
+  display: flex;
+  justify-content: left;
+}
+#calendarHeader h2{
+  margin: 0;
+}
+#calendarHeader img{
+  margin-left: 5%;
 }
 
 /*----------------------------------------------------------------------------------------*/
