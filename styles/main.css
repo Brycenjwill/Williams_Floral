@@ -157,6 +157,16 @@ main h1{ /*Code for title above header*/
   margin-left: 5%;
 }
 
+#smokescreen{ /*Grey popoup for button*/
+  position: fixed;
+  top: 0; bottom: 0; left: 0; right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+  opacity: .5;
+  z-index: 6000;
+  display: none;
+}
 /*----------------------------------------------------------------------------------------*/
 
 
