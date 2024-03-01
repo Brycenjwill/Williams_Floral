@@ -112,17 +112,19 @@ function createDateDisplay(date){
     newDay.style.justifyItems = "center";
     newDay.appendChild(newDate)
     
-    if (date.getCurrent() != 0){ //When date outside current month. . .
-        newDate.style.color = "grey"; //Set dates to some color on calendar to indicate.
+    if (date.getCurrent() == 0){ //When date outside current month. . .
+        newDay.onclick = function(){smokeScreen()};
     }
 
     //If a user clicks on a date ahead of curmonth, move 1 month forward
     if (date.getCurrent() == 1){ 
+        newDate.style.color = "grey"; //Set dates to some color on calendar to indicate.
         newDay.onclick = function(){nextMonth()};
     }
 
     //If a user clicks on a date behind curmonth, move 1 month back
     if (date.getCurrent() == -1){ 
+        newDate.style.color = "grey"; //Set dates to some color on calendar to indicate.
         newDay.onclick = function(){prevMonth()};
     }
 
@@ -221,6 +223,24 @@ function nextMonth(){
     clearCalendar();
     Display(dates, curmonth, curyear);
 }
+
+//Date display on date click
+/-----------------------------------------------------------------------------------------------------------------------/
+
+//Grey the background out of the date display
+function smokeScreen(){
+    document.getElementById("smokescreen").style.display = "block";
+    document.getElementById("smokescreen").onclick = function(){removeSmokeScreen()};
+
+    
+}
+//Remove smoke screen display when clicked
+function removeSmokeScreen(){
+    document.getElementById("smokescreen").style.display = "none";
+    document.getElementById("smokescreen").onclick = null; //Remove onclick to avoid issues.
+
+}
+
 
 
 //Initial launch
