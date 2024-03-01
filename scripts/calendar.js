@@ -116,6 +116,16 @@ function createDateDisplay(date){
         newDate.style.color = "grey"; //Set dates to some color on calendar to indicate.
     }
 
+    //If a user clicks on a date ahead of curmonth, move 1 month forward
+    if (date.getCurrent() == 1){ 
+        newDay.onclick = function(){nextMonth()};
+    }
+
+    //If a user clicks on a date behind curmonth, move 1 month back
+    if (date.getCurrent() == -1){ 
+        newDay.onclick = function(){prevMonth()};
+    }
+
     document.getElementById("calendarbox").appendChild(newDay);
 }
 //Return last day of given month. . . Used for getting num of days to display per month. . .
