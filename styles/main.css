@@ -186,9 +186,11 @@ main h1{ /*Code for title above header*/
 }
  /*The format of the times displayed when date is clicked on*/
 .time{
-  border-top: black;
+  border-bottom: black;
+  border-style: solid;
+  border-width: 1px;
   width: 100%;
-  padding-top: 10%;
+  padding-top: 5%;
   padding-bottom: 10%;
 
 }
