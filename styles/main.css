@@ -164,8 +164,23 @@ main h1{ /*Code for title above header*/
   width: 100%;
   background-color: grey;
   opacity: .5;
-  z-index: 6000;
+  z-index: 3;
   display: none;
+}
+
+#eventDisplay{
+  display: none;
+  background-color: rgb(58, 58, 58); /*Temp as of mar 11*/
+  color: white;
+  position: absolute;
+  overflow-y: auto; /*User can scroll down when too many events are displaying*/
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: var(--header-size);
+  margin-bottom: 20%;
+  width: 90%;
+  z-index: 5;
+  max-height: 80%;
 }
 /*----------------------------------------------------------------------------------------*/
 

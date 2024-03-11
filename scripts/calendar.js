@@ -1,3 +1,51 @@
+// Import the functions you need from the SDKs you need
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+
+// TODO: Add SDKs for Firebase products that you want to use
+
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyA05IGiBsgQu67y08lM316H1FWBBUKmWl8",
+
+  authDomain: "williams-floral-events.firebaseapp.com",
+
+  projectId: "williams-floral-events",
+
+  storageBucket: "williams-floral-events.appspot.com",
+
+  messagingSenderId: "1069295116896",
+
+  appId: "1:1069295116896:web:d2a1c53acc95e47e5d1905",
+
+  measurementId: "G-6WTFJSS9VR"
+
+};
+
+let initialized = false;
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+firebase.initializeApp(firebaseConfig);
+
+
+
+
+
+
+
+
+
 class Day{ 
     constructor(num, pos, current){
         this.dayofmonth = num;
@@ -20,10 +68,8 @@ class Day{
         return this.inCurrentMonth;
     }
 
-    display(){
-        //Display date in calendar
-    }
 }
+
 class Event{ //Events are created when a date is selected. Then they are deleted
     constructor(time){
         this.time = time; //Set time of event to display
@@ -50,12 +96,12 @@ function Display(dates, curmonth, curyear){
         datesAppended = datesAppended.concat(postdates); //Combine date lists. . .
 
         for(let i = 0; i < datesAppended.length; i++){
-            createDateDisplay(datesAppended[i])
+            createDateDisplay(datesAppended[i], curmonth, curyear)
         }  
     }
     else{
         for(let i = 0; i < datesAppended.length; i++){
-            createDateDisplay(datesAppended[i])
+            createDateDisplay(datesAppended[i], curmonth, curyear)
         }  
     }
     
@@ -63,7 +109,7 @@ function Display(dates, curmonth, curyear){
 
     //Check if all 6 rows are filled in calendar. . . Fill if not.
     if(datesAppended.length != 42){
-        first = datesAppended[datesAppended.length - 1];
+        let first = datesAppended[datesAppended.length - 1];
         //Check for if month ends on a saturday. . .
         if (first.getCurrent() == 0){
             first = new Day(0, null, 1);
@@ -99,11 +145,11 @@ function Display(dates, curmonth, curyear){
     document.getElementById("monthValue").innerHTML = month + " " + curyear;
 }
 
-function createDateDisplay(date){ 
+function createDateDisplay(date, curmonth, curyear){ 
     
     //Create document element
-    newDay = document.createElement("div"); //Create date div box
-    newDate = document.createElement("p");
+    let newDay = document.createElement("div"); //Create date div box
+    let newDate = document.createElement("p");
     newDate.innerHTML = date.getDay(); 
     newDay.className = "createdDate";
     //Style Document Element
@@ -113,7 +159,7 @@ function createDateDisplay(date){
     newDay.appendChild(newDate)
     
     if (date.getCurrent() == 0){ //When date outside current month. . .
-        newDay.onclick = function(){smokeScreen()};
+        newDay.onclick = function(){displayEvents(curmonth, curyear, date.getDay())};
     }
 
     //If a user clicks on a date ahead of curmonth, move 1 month forward
@@ -158,7 +204,7 @@ function getPrevOverlap(curmonth, curyear, weekday){
 
 function getPostOverlap(curmonth, curyear, weekday){
     let postdates = [];
-    daysLeft = 6 - weekday; //Weekday is stored in a 0 index, this makes the math work. . .
+    let daysLeft = 6 - weekday; //Weekday is stored in a 0 index, this makes the math work. . .
     
     
     for(let i = 0; i < daysLeft; i++){ //Add dates per each missing date in week. . .
@@ -231,6 +277,8 @@ function nextMonth(){
 function smokeScreen(){
     document.getElementById("smokescreen").style.display = "block";
     document.getElementById("smokescreen").onclick = function(){removeSmokeScreen()};
+    document.getElementById("eventDisplay").style.display = "block";
+
 
     
 }
@@ -238,6 +286,7 @@ function smokeScreen(){
 function removeSmokeScreen(){
     document.getElementById("smokescreen").style.display = "none";
     document.getElementById("smokescreen").onclick = null; //Remove onclick to avoid issues.
+    document.getElementById("eventDisplay").style.display = "none";
 
 }
 
@@ -251,3 +300,54 @@ let curyear = d.getFullYear();
 
 let dates = genDates(d);
 Display(dates, curmonth, curyear);
+
+//Cleanup. . .
+/-----------------------------------------------------------------------------------------------------------------------/
+document.getElementById("prevMonth").onclick = function(){prevMonth()};
+document.getElementById("nextMonth").onclick = function(){nextMonth()};
+
+
+
+
+
+//Displaying the scheduled events when a day is clicked. . .
+/-----------------------------------------------------------------------------------------------------------------------/
+function displayEvents(curmonth, curyear, date, events=null){
+
+
+    //When events are passed back in
+    if (events){
+        console.log(events)
+    }
+
+    else if(events == null){
+    smokeScreen();
+    getEvents(curmonth, curyear, date);
+    }
+    else{
+        console.log("returned undefined array / empty")
+    }
+}
+
+//Get events for given day. . .
+function getEvents(curmonth, curyear, date){
+    //Define database
+    var db = firebase.firestore(); 
+
+    //Only change these settings once. . .
+
+
+    db.collection(String(curyear)).doc(String(curmonth)).get().then((snapshot) => {
+    let events = snapshot.data()[String(date)]; //FINALLY GOT THE DATA!!!
+
+    if(events){
+    displayEvents(curmonth,curyear,date,events);
+    }
+    else{
+        displayEvents(curmonth,curyear,date, 0);
+    }
+})
+
+    
+  }
+
