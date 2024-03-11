@@ -163,12 +163,13 @@ main h1{ /*Code for title above header*/
   height: 100%;
   width: 100%;
   background-color: grey;
-  opacity: .5;
+  opacity: .25;
   z-index: 3;
   display: none;
 }
 
 #eventDisplay{
+
   flex-direction: column;
   display: none;
   background-color: white;
