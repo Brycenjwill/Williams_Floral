@@ -169,18 +169,28 @@ main h1{ /*Code for title above header*/
 }
 
 #eventDisplay{
+  flex-direction: column;
   display: none;
   background-color: white;
   position: absolute;
   overflow-y: auto; /*User can scroll down when too many events are displaying*/
-  margin-left: 4%;
-  margin-right: 4%;
+  margin-left: 5%;
+  margin-right: 5%;
   margin-top: var(--header-size);
   margin-bottom: 20%;
   z-index: 5;
+  min-width: 90%;
   max-height: 80%;
-  border-color: black;
   border-radius: 10px;
+
+}
+ /*The format of the times displayed when date is clicked on*/
+.time{
+  border-top: black;
+  width: 100%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+
 }
 /*----------------------------------------------------------------------------------------*/
 

@@ -277,7 +277,7 @@ function nextMonth(){
 function smokeScreen(){
     document.getElementById("smokescreen").style.display = "block";
     document.getElementById("smokescreen").onclick = function(){removeSmokeScreen()};
-    document.getElementById("eventDisplay").style.display = "block";
+    document.getElementById("eventDisplay").style.display = "flex";
 
 
     
