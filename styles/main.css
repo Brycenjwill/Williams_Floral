@@ -174,13 +174,14 @@ main h1{ /*Code for title above header*/
   color: white;
   position: absolute;
   overflow-y: auto; /*User can scroll down when too many events are displaying*/
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 4%;
+  margin-right: 4%;
   margin-top: var(--header-size);
   margin-bottom: 20%;
   width: 90%;
   z-index: 5;
   max-height: 80%;
+  border-radius: 10px;
 }
 /*----------------------------------------------------------------------------------------*/
 
