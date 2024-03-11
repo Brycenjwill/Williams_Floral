@@ -325,7 +325,7 @@ function displayEvents(curmonth, curyear, date, events=null){
     getEvents(curmonth, curyear, date);
     }
     else{
-        console.log("returned undefined array / empty")
+        return
     }
 }
 
