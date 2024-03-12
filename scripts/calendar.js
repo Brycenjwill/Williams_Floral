@@ -38,7 +38,7 @@ firebase.initializeApp(firebaseConfig);
 
 firebase.initializeApp(firebaseConfig);
 
-
+var db = firebase.firestore(); 
 
 
 
@@ -282,13 +282,21 @@ function smokeScreen(){
 
     
 }
-//Remove smoke screen display when clicked
+//Remove smoke screen display and event display when smoke is clicked
 function removeSmokeScreen(){
     document.getElementById("smokescreen").style.display = "none";
     document.getElementById("smokescreen").onclick = null; //Remove onclick to avoid issues.
     document.getElementById("eventDisplay").style.display = "none";
 
+    //Handle the time display reset
+    let hours = document.getElementsByClassName("time");
+    for (let hour of hours){
+        hour.style.backgroundColor = "white";
+        hour.style.color = "black";
+    }
 }
+
+
 
 
 
@@ -334,7 +342,6 @@ function displayEvents(curmonth, curyear, date, events=null){
 
 function displayEvent(hour, events){
     if(events.includes(parseInt(hour.id))){ /*When the given time is taken up. . .*/
-        console.log("The time " + hour.id + "is in the events for that day.");
         hour.style.backgroundColor = "maroon";
         hour.style.color = "white";
     } 
@@ -343,11 +350,9 @@ function displayEvent(hour, events){
 //Get events for given day. . .
 function getEvents(curmonth, curyear, date){
     //Define database
-    var db = firebase.firestore(); 
+
 
     //Only change these settings once. . .
-
-
     db.collection(String(curyear)).doc(String(curmonth)).get().then((snapshot) => {
     let events = snapshot.data()[String(date)]; //FINALLY GOT THE DATA!!!
 
