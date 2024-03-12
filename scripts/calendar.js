@@ -315,9 +315,12 @@ document.getElementById("nextMonth").onclick = function(){nextMonth()};
 function displayEvents(curmonth, curyear, date, events=null){
 
 
-    //When events are passed back in
+    //When events are passed back in display them
     if (events){
-        console.log(events)
+        let hours = document.getElementsByClassName("time");
+        for (let hour of hours){
+            displayEvent(hour, events);
+        }
     }
 
     else if(events == null){
@@ -327,6 +330,14 @@ function displayEvents(curmonth, curyear, date, events=null){
     else{
         return
     }
+}
+
+function displayEvent(hour, events){
+    if(events.includes(parseInt(hour.id))){ /*When the given time is taken up. . .*/
+        console.log("The time " + hour.id + "is in the events for that day.");
+        hour.style.backgroundColor = "maroon";
+        hour.style.color = "white";
+    } 
 }
 
 //Get events for given day. . .
@@ -350,4 +361,6 @@ function getEvents(curmonth, curyear, date){
 
     
   }
+
+  
 
