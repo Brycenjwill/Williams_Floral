@@ -1,0 +1,30 @@
+
+@UI//View
+(A) Create an event dispay container @Due(Sat-Mar-16)
+    -How-
+      -Possibly have a scrollable div with a max width and height smaller than
+       page width and height
+
+(B) Research modern date display UI @Due(Sat-Mar-16)
+    -How-
+        -Maybe copy from Googles ui design for day view???
+
+(B) Implement modern date display UI that shows events @Due(Sat-Mar-16)--Flex
+
+
+@Backend
+(A) Decide how to store event data once retrieved @Due(Sat-Mar-16)
+    -How-
+        -Using the Event Object-
+        - Maybe create an event object for each event to display, storing the time
+            in the object, as well as the length (If needed for 30, 15, 60 min blocks?)
+
+        -Using a list of tuples?- 
+        - If only shooting for a v basic functionality, store tuple of time and len of event?
+
+
+(B) Refactor READ OP code using Promises @Due(PRE-LAUNCHJ)
+    -How-
+        -Rewrite getDb functions to no longer use recursion // .then statements, 
+        to use promises instead
+
