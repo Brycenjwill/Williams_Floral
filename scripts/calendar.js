@@ -291,9 +291,16 @@ function removeSmokeScreen(){
         hour.style.color = "black";
     }
 }
-function displayForm(hour){
+
+//Display the form. Changes the form {iframe} url to match preset input from calendar date and time.
+function displayForm(hour, curmonth, curyear, date){
     document.getElementById("formbox").style.display = "block";
     console.log(hour);
+
+    //Auto fill form with appropriate data by changing iframe src
+
+    //Current iframe: https://docs.google.com/forms/d/e/1FAIpQLSfU6RFXiTkZchOvF23RndfTt5ihWuj5NGzM3oAqZRbao1eiBA/viewform?usp=pp_url&entry.106513577=1&entry.127550023=1&entry.1024640633=1&entry.657349170=2024-11-11&entry.1912670123=14:11
+    console.log(curmonth);
 }
 
 
@@ -306,7 +313,7 @@ function displayEvents(curmonth, curyear, date, events=null){
     if (events){
 
         for (let hour of hours){
-            displayEvent(hour, events);
+            displayEvent(hour, events, curmonth, curyear, date);
         }
     }
 
@@ -315,7 +322,7 @@ function displayEvents(curmonth, curyear, date, events=null){
 
     //Display hours no matter what
     for (let hour of hours){
-        displayEvent(hour, [-1]);
+        displayEvent(hour, [-1], curmonth, curyear, date); //events is sent in as [-1] so that none match hours in date
     }
     getEvents(curmonth, curyear, date);
     }
@@ -325,7 +332,7 @@ function displayEvents(curmonth, curyear, date, events=null){
 
 }
 
-function displayEvent(hour, events){
+function displayEvent(hour, events, curmonth, curyear, date){
     if(events.includes(parseInt(hour.id))){ /*When the given time is taken up. . .*/
         hour.style.backgroundColor = "maroon";
         hour.style.color = "white";
@@ -334,7 +341,7 @@ function displayEvent(hour, events){
 
     //If hour is not in events, then the user can request this time slot using a form.
     else{
-        hour.onclick = function(){displayForm(hour.id)};
+        hour.onclick = function(){displayForm(hour.id, curmonth, curyear, date)};
     }
 }
 //Get events for given day. . .
