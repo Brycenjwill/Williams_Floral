@@ -41,11 +41,6 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore(); 
 
 
-
-
-
-
-
 class Day{ 
     constructor(num, pos, current){
         this.dayofmonth = num;
@@ -273,7 +268,7 @@ function nextMonth(){
 //Date display on date click
 /-----------------------------------------------------------------------------------------------------------------------/
 
-//Grey the background out of the date display
+//Grey the background out of the date display and display day calendar view
 function smokeScreen(){
     document.getElementById("smokescreen").style.display = "block";
     document.getElementById("smokescreen").onclick = function(){removeSmokeScreen()};
@@ -287,6 +282,7 @@ function removeSmokeScreen(){
     document.getElementById("smokescreen").style.display = "none";
     document.getElementById("smokescreen").onclick = null; //Remove onclick to avoid issues.
     document.getElementById("eventDisplay").style.display = "none";
+    document.getElementById("formbox").style.display = "none";
 
     //Handle the time display reset
     let hours = document.getElementsByClassName("time");
@@ -295,37 +291,20 @@ function removeSmokeScreen(){
         hour.style.color = "black";
     }
 }
-
-
-
-
-
-//Initial launch
-/-----------------------------------------------------------------------------------------------------------------------/
-const d = new Date();
-let curmonth = d.getMonth(); //initialize displayed month as actual month . . .
-let curyear = d.getFullYear();
-
-let dates = genDates(d);
-Display(dates, curmonth, curyear);
-
-//Cleanup. . .
-/-----------------------------------------------------------------------------------------------------------------------/
-document.getElementById("prevMonth").onclick = function(){prevMonth()};
-document.getElementById("nextMonth").onclick = function(){nextMonth()};
-
-
-
+function displayForm(hour){
+    document.getElementById("formbox").style.display = "block";
+    console.log(hour);
+}
 
 
 //Displaying the scheduled events when a day is clicked. . .
 /-----------------------------------------------------------------------------------------------------------------------/
 function displayEvents(curmonth, curyear, date, events=null){
 
-
+    let hours = document.getElementsByClassName("time");
     //When events are passed back in display them
     if (events){
-        let hours = document.getElementsByClassName("time");
+
         for (let hour of hours){
             displayEvent(hour, events);
         }
@@ -333,11 +312,17 @@ function displayEvents(curmonth, curyear, date, events=null){
 
     else if(events == null){
     smokeScreen();
+
+    //Display hours no matter what
+    for (let hour of hours){
+        displayEvent(hour, [-1]);
+    }
     getEvents(curmonth, curyear, date);
     }
     else{
         return
     }
+
 }
 
 function displayEvent(hour, events){
@@ -345,14 +330,15 @@ function displayEvent(hour, events){
         hour.style.backgroundColor = "maroon";
         hour.style.color = "white";
     } 
-}
 
+    //If hour is not in events, then the user can request this time slot using a form.
+    else{
+        hour.onclick = function(){displayForm(hour.id)};
+    }
+}
 //Get events for given day. . .
 function getEvents(curmonth, curyear, date){
-    //Define database
 
-
-    //Only change these settings once. . .
     db.collection(String(curyear)).doc(String(curmonth)).get().then((snapshot) => {
     let events = snapshot.data()[String(date)]; //FINALLY GOT THE DATA!!!
 
@@ -368,4 +354,19 @@ function getEvents(curmonth, curyear, date){
   }
 
   
+
+//Initial launch
+/-----------------------------------------------------------------------------------------------------------------------/
+const d = new Date();
+let curmonth = d.getMonth(); //initialize displayed month as actual month . . .
+let curyear = d.getFullYear();
+
+let dates = genDates(d);
+Display(dates, curmonth, curyear);
+
+//Cleanup. . .
+/-----------------------------------------------------------------------------------------------------------------------/
+document.getElementById("prevMonth").onclick = function(){prevMonth()};
+document.getElementById("nextMonth").onclick = function(){nextMonth()};
+
 

@@ -1,9 +1,13 @@
+//hotkeys:
+    @extension.toggleCompletion	ctrl+shift+x
 
 @UI//View
-(A) Create an event dispay container @Due(Sat-Mar-16)
-    -How-
-      -Possibly have a scrollable div with a max width and height smaller than
-       page width and height
+x (A) 2024-03-13 Create an event dispay container @Due(Sat-Mar-16)
+    x 2024-03-13 -How-
+      x 2024-03-13 -Possibly have a scrollable div with a max width and height smaller than
+       x 2024-03-13 page width and height
+
+(A) Integrate some sort of form for the user to add to a given time slot @Due(Sat-Mar-16)
 
 (B) Research modern date display UI @Due(Sat-Mar-16)
     -How-
@@ -12,7 +16,7 @@
 (B) Implement modern date display UI that shows events @Due(Sat-Mar-16)--Flex
 
 
-@Backend
+@Backend//Database
 (A) Decide how to store event data once retrieved @Due(Sat-Mar-16)
     -How-
         -Using the Event Object-
@@ -28,3 +32,8 @@
         -Rewrite getDb functions to no longer use recursion // .then statements, 
         to use promises instead
 
+
+(C) Optomize read operation
+    -How-
+        -Make sure that there isn't an issue with the way data is being read from db thats
+        causing unneeded slowdown.

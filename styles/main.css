@@ -195,6 +195,24 @@ main h1{ /*Code for title above header*/
   padding-bottom: 10%;
 
 }
+
+
+/*Style google form*/
+#formbox{
+  display: none;
+  background-color: white;
+  position: absolute;
+  left: 4%;
+
+  margin-top: var(--header-size);
+  z-index: 5;
+  width: 92%;
+  height: 80%;
+}
+#formbox iframe{
+  height: 100%;
+  width: 100%;
+}
 /*----------------------------------------------------------------------------------------*/
 
 
