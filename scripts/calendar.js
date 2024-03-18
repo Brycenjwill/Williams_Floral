@@ -329,6 +329,7 @@ function displayEvent(hour, events){
     if(events.includes(parseInt(hour.id))){ /*When the given time is taken up. . .*/
         hour.style.backgroundColor = "maroon";
         hour.style.color = "white";
+        hour.onclick = "none";
     } 
 
     //If hour is not in events, then the user can request this time slot using a form.
