@@ -41,6 +41,8 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore(); 
 
 
+const MONTHS = ["January", "February", "March", "April", "May","June","July","August","September","October","November","December" ]
+
 class Day{ 
     constructor(num, pos, current){
         this.dayofmonth = num;
@@ -65,18 +67,10 @@ class Day{
 
 }
 
-class Event{ //Events are created when a date is selected. Then they are deleted
-    constructor(time){
-        this.time = time; //Set time of event to display
-    }
-    display(){
-        //Display event in popup
-    }
-}
 //Main logic for generating calendar
 /-----------------------------------------------------------------------------------------------------------------------/
 //Display month. Decides what should be rendered based on month. . . The main logic for displaying calendar dates
-function Display(dates, curmonth, curyear){ 
+function displayCalendar(dates, curmonth, curyear){ 
     let datesAppended = [];
     if(getFirstOfMonth(curmonth, curyear) == 0){ //If the month start on a Sunday. . .
         datesAppended = dates;
@@ -332,6 +326,10 @@ function displayForm(hour, curmonth, curyear, date){
 /-----------------------------------------------------------------------------------------------------------------------/
 function displayEvents(curmonth, curyear, date, events=null){
 
+    //Set date value to display at top of hours
+    document.getElementById("time-date").innerHTML = MONTHS[curmonth].concat(" ", String(date), ", ", String(curyear));
+
+
     let hours = document.getElementsByClassName("time");
     //When events are passed back in display them
     if (events){
@@ -394,7 +392,7 @@ let curmonth = d.getMonth(); //initialize displayed month as actual month . . .
 let curyear = d.getFullYear();
 
 let dates = genDates(d);
-Display(dates, curmonth, curyear);
+displayCalendar(dates, curmonth, curyear);
 
 //Cleanup. . .
 /-----------------------------------------------------------------------------------------------------------------------/

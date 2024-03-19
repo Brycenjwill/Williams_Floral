@@ -168,6 +168,8 @@ main h1{ /*Code for title above header*/
   display: none;
 }
 
+
+/*The code for where events//times are displayed when a day is selected*/
 #eventDisplay{
 
   flex-direction: column;
@@ -193,7 +195,12 @@ main h1{ /*Code for title above header*/
   width: 100%;
   padding-top: 5%;
   padding-bottom: 10%;
+  font-size: 2rem;
+}
 
+/*The current date display at the top when a date is selected*/
+#time-date{
+  font-size: 3rem;
 }
 
 
