@@ -7,7 +7,8 @@ x (A) 2024-03-13 Create an event dispay container @Due(Sat-Mar-16)
       x 2024-03-13 -Possibly have a scrollable div with a max width and height smaller than
        x 2024-03-13 page width and height
 
-(A) Integrate some sort of form for the user to add to a given time slot @Due(Sat-Mar-16)
+x (A) 2024-03-19 Integrate some sort of form for the user to add to a given time slot @Due(Sat-Mar-16)
+x 2024-03-19 
 
 (B) Research modern date display UI @Due(Sat-Mar-16)
     -How-
