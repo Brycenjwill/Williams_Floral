@@ -240,7 +240,7 @@ function prevMonth(){
     let dates = genDates(d);
 
     clearCalendar();
-    Display(dates, curmonth, curyear);
+    displayCalendar(dates, curmonth, curyear);
 }
 
 //Shift month 1 to future
@@ -256,7 +256,7 @@ function nextMonth(){
     let dates = genDates(d);
 
     clearCalendar();
-    Display(dates, curmonth, curyear);
+    displayCalendar(dates, curmonth, curyear);
 }
 
 //Date display on date click
