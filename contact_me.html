@@ -54,9 +54,30 @@
         <div class="time" id="19">7 PM</div>
     </div>
 
-    <div id="formbox" >
-        <iframe id="form" src="https://docs.google.com/forms/d/e/1FAIpQLSfU6RFXiTkZchOvF23RndfTt5ihWuj5NGzM3oAqZRbao1eiBA/viewform?usp=pp_url&entry.106513577=1&entry.127550023=1&entry.1024640633=1&entry.657349170=2024-11-11&entry.1912670123=14:11" >Loading…</iframe>
-    </div>
+    <div id="formbox">
+        <h1>Request Form</h1>
+        <form id="appRequest">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name_input"><br><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email_input"><br><br>
+            <label for="event">What event is this for?</label>
+            <input type="text" id="event" name="event_input"><br><br>
+    
+            <div id="hiddenform" style="display: none;">
+            <label  for="time"></label>
+            <input type="hidden" id="time" name="time_input"><br><br>
+            <label for="date"></label>
+            <input type="hidden" id="date" name="date_input"><br><br>
+            <label for="month"></label>
+            <input type="hidden" id="month" name="month_input"><br><br>
+            <label for="year"></label>
+            <input type="hidden" id="year" name="year_input"><br><br>
+            </div>
+    
+            <input type="submit" value="Submit Request"></input>
+        </form>        
+        </div>
 
     <h1>My Availability</h1>
 
@@ -98,7 +119,7 @@
 
 <script src="scripts/main.js"></script> 
 <script type="module" src="scripts/calendar.js"></script> 
-
+<script src="scripts/form.js"></script>
 
 
 

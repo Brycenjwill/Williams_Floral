@@ -210,15 +210,31 @@ main h1{ /*Code for title above header*/
   background-color: white;
   position: absolute;
   left: 4%;
-
   margin-top: var(--header-size);
   z-index: 5;
   width: 92%;
   height: 80%;
+  margin: auto;
+  text-align: center;
 }
-#formbox iframe{
-  height: 100%;
+input[type=text], select {
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit] {
   width: 100%;
+  background-color: lightpink;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 /*----------------------------------------------------------------------------------------*/
 

@@ -277,7 +277,7 @@ function removeSmokeScreen(){
     document.getElementById("smokescreen").onclick = null; //Remove onclick to avoid issues.
     document.getElementById("eventDisplay").style.display = "none";
     document.getElementById("formbox").style.display = "none";
-
+    
     //Handle the time display reset
     let hours = document.getElementsByClassName("time");
     for (let hour of hours){
@@ -288,36 +288,7 @@ function removeSmokeScreen(){
 
 //Display the form. Changes the form {iframe} url to match preset input from calendar date and time.
 function displayForm(hour, curmonth, curyear, date){
-
-
-
-    //Auto fill form with appropriate data by changing iframe src
-
-    //Current iframe: https://docs.google.com/forms/d/e/1FAIpQLSfU6RFXiTkZchOvF23RndfTt5ihWuj5NGzM3oAqZRbao1eiBA/viewform?usp=pp_url&entry.106513577=1&entry.127550023=1&entry.1024640633=1&entry.657349170=2024-11-11&entry.1912670123=14:11
-    let baseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfU6RFXiTkZchOvF23RndfTt5ihWuj5NGzM3oAqZRbao1eiBA/viewform?usp=pp_url&entry.657349170=";
-    
-    //Format date values so they can be passed
-    if(curmonth < 10){
-        curmonth = String("0").concat(String(curmonth+1));
-    }
-    else{
-        curmonth = String(curmonth+1);
-    }
-
-    if(date < 10){
-        date = String("0").concat(String(date));
-    }
-    else{
-        date = String(date);
-    }
-
-    let yearMonthDate = String(curyear).concat("-",curmonth,"-", String(date));
-    let fillerUrl = "&entry.1912670123=";
-    let time = String(hour).concat(":00");
-    let formUrl = baseUrl.concat(yearMonthDate, fillerUrl, time)
-    console.log(yearMonthDate);
-    let form = document.getElementById("form");
-    form.src = formUrl; //Change url of form to new form url
+    localStorage.setItem("time", hour);
     document.getElementById("formbox").style.display = "block";
 }
 
@@ -384,6 +355,7 @@ function getEvents(curmonth, curyear, date){
   }
 
   
+
 
 //Initial launch
 /-----------------------------------------------------------------------------------------------------------------------/
