@@ -69,4 +69,19 @@ function sendDataToGoogleAppsScript(data) {
     //document.getElementById("appRequest").reset();
 
     document.getElementById("formbox").style.display = "none";
+    removeSmokeScreen(); //Clean the screen
+}
+
+function removeSmokeScreen(){
+    document.getElementById("smokescreen").style.display = "none";
+    document.getElementById("smokescreen").onclick = null; //Remove onclick to avoid issues.
+    document.getElementById("eventDisplay").style.display = "none";
+    document.getElementById("formbox").style.display = "none";
+    
+    //Handle the time display reset
+    let hours = document.getElementsByClassName("time");
+    for (let hour of hours){
+        hour.style.backgroundColor = "white";
+        hour.style.color = "black";
+    }
 }
