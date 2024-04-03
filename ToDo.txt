@@ -16,6 +16,9 @@ x 2024-03-19
 
 (B) Implement modern date display UI that shows events @Due(Sat-Mar-16)--Flex
 
+(A) Replace google form with custom form. 
+    -How-
+        -The form will still trigger google app script functions. 
 
 @Backend//Database
 (A) Decide how to store event data once retrieved @Due(Sat-Mar-16)
