@@ -213,7 +213,6 @@ main h1{ /*Code for title above header*/
   margin-top: var(--header-size);
   z-index: 5;
   width: 92%;
-  height: 80%;
   margin: auto;
   text-align: center;
 }

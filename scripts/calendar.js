@@ -290,6 +290,7 @@ function removeSmokeScreen(){
 function displayForm(hour, curmonth, curyear, date){
     localStorage.setItem("time", hour);
     document.getElementById("formbox").style.display = "block";
+    document.getElementById("eventDisplay").style.display = "none";
 }
 
 

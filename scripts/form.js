@@ -69,6 +69,7 @@ function sendDataToGoogleAppsScript(data) {
     //document.getElementById("appRequest").reset();
 
     document.getElementById("formbox").style.display = "none";
+    document.getElementById("appRequest").reset();
     removeSmokeScreen(); //Clean the screen
 }
 
